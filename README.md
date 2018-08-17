@@ -1,5 +1,4 @@
-FYPArtifacts
-=======
+# FYPArtifacts
 The purpose of this repo is to help the team in assigning and reviewing artifact which will be made as an effort to complete the FYP. All feedback must be in written on github.
 
 ## Getting Started
