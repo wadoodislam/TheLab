@@ -1,4 +1,4 @@
-1) List down the console commands for git with there usage examples and explain what each of this does in a word doc.
+1) List down the console commands for git with their usage examples and explain what each of this does in a word doc.
 - fetch 
 - commit
 - init
