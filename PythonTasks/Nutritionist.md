@@ -22,6 +22,6 @@ You have to develop a python program that asks for users name, gender and given 
 3. Open pycharm once pycharm is ready.
 4. Select Checkout a project from version control.
 5. And clone this repository in the pycharm.
-6. Check-out into the *youname-master* branch.
+6. Check-out into the *yourname-master* branch.
 
 *You can use [this website](https://www.calculator.net/) for reference of the formulas and variables reqired for the above task.*
