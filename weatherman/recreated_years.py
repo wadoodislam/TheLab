@@ -1,5 +1,5 @@
 import os
-
+import sys
 
 class readings():
 
@@ -16,7 +16,7 @@ class readings():
 def years(year_no):
     a = 11
     name_list = []
-    for name in os.listdir('weatherfiles'):
+    for name in os.listdir(sys.argv[1]):
         if name.endswith(".txt"):
             # print(name)
             file_name = name.split("_")
@@ -63,6 +63,7 @@ def years(year_no):
 
                 c = c + 1
 
+    print("The weather report for year ",year_no, " is as follows : ")
     print("Highest temprature was ", obj.highest_temp, " degree Centigrade recorded on ", obj.date1)
     print("Lowest temprature was ", obj.lowest_temp, " degree Centigrade recorded on ", obj.date2)
     print("Max Humidity level was ", obj.max_humidity, " recorded on ", obj.date3)
@@ -85,9 +86,9 @@ obj = readings
 
 def main():
     while True:
-        year_no = input("Enter year ( 2004-2016 )  =  ")
+        year_no = sys.argv[2]
         years(year_no)
-
+        exit()
     return
 
 main()
