@@ -21,19 +21,18 @@ class WeatherReading:
 	
 
 class Reader:
-	_weather_data = []		
-	def read_files(self,opt,path,year,month="*"):
+		
+	def __init__(self,opt,path,year,month="*"):
+		_weather_data = []	
 		for file_name in glob.glob(os.path.join(path, f'Murree_weather_{year}_{month}.txt')):
 			with open(file_name,'r') as new_file:
 				for row in csv.DictReader(new_file):
 					obj=WeatherReading(row)
 					self._weather_data.append(obj.write_dict())
-		
-		if opt=='-e':
-			Calculator().calculate_for_e(self._weather_data)
-		elif opt=='-a':
-			Calculator().calculate_for_a(self._weather_data)
 
+		return _weather_data
+		
+		
 
 class Calculator:
 	def calculate_for_e(self,_weather_files):
@@ -48,7 +47,7 @@ class Calculator:
 			if row['max_hum'] > highest_hum['max_hum']: #Findind maximum huidity
 				highest_hum=row
 		
-		Reporter().reporter_for_e(highest_temp,lowest_temp,highest_hum)
+		return highest_temp,lowest_temp,highest_hum
 
 	def calculate_for_a(self,_weather_files):
 		avg_high=[]
@@ -59,20 +58,37 @@ class Calculator:
 			avg_low.append(int(row['min_temp']))
 			avg_mean_hum.append(int(row['mean_hum']))
 
+		return avg_high,avg_low,avg_mean_hum
+
 		Reporter().reporter_for_a(int(mean(avg_high)),int(mean(avg_low)),int(mean(avg_mean_hum)))
 
 
 class Reporter:	
-		def reporter_for_e(self,highest_temp,lowest_temp,highest_hum):
-			print(f"Highest: {highest_temp['max_temp']}C on  {highest_temp['date']}")
-			print(f"Lowest: {lowest_temp['min_temp']}C on  {lowest_temp['date']}")
-			print(f"Humidity: {highest_hum['max_hum']}% on {highest_hum['date']}")
+	def __init__(self,weather_data):
+		self.calculator=Calculator(weather_data)
+	def reporter_for_e(self,highest_temp,lowest_temp,highest_hum):
+		highest_temp, lowest_temp, highest_hum=self.calculator.calculate_for_e()
+		print(f"Highest: {highest_temp['max_temp']}C on  {highest_temp['date']}")
+		print(f"Lowest: {lowest_temp['min_temp']}C on  {lowest_temp['date']}")
+		print(f"Humidity: {highest_hum['max_hum']}% on {highest_hum['date']}")
 
-		def reporter_for_a(self,avg_high,avg_low,avg_mean_hum):
-			print(f"Highest Average: {avg_high}C")
-			print(f"Lowest Average: {avg_low}C")
-			print(f"Average Mean Humidity: {avg_mean_hum}%")
+	def reporter_for_a(self,avg_high,avg_low,avg_mean_hum):
+		avg_high,avg_low,avg_mean_hum=self.calculator.calculate_for_a()
+		print(f"Highest Average: {avg_high}C")
+		print(f"Lowest Average: {avg_low}C")
+		print(f"Average Mean Humidity: {avg_mean_hum}%")
 
 		
-class MainClass:
-	Reader().read_files('-a','D:\\Data\\Study Data\\TheLab\\weatherfiles','2016','Mar')
+
+
+def main():
+	weather_data=Reader('-a','D:\\Data\\Study Data\\TheLab\\weatherfiles','2016','Mar')
+
+	if opt=='-e':
+			Calculator().calculate_for_e(self._weather_data)
+		elif opt=='-a':
+			Calculator().calculate_for_a(self._weather_data)
+
+
+if __name__ == '__main__':
+	main()
