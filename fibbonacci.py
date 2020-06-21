@@ -8,4 +8,10 @@ seed_val_1= int(input("Enter 1st seed value: "))
 seed_val_2= int(input("Enter 2nd seed value: "))
 limit = int(input("Enter limit: "))
 
+
+
+
+
 fibonacci(limit,seed_val_1, seed_val_2)
+
+
