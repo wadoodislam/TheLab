@@ -12,4 +12,3 @@ by newbies for training/practice will be checked in here. All feedback must be i
 
 Do not add log files, temp files, data files etc.
 **Do not merge/push anything into master branch**.
-ok
