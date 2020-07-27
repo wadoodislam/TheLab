@@ -9,9 +9,9 @@ def calculate(a,b,operator):
         result = float(a) / float(b)
     return result
 
-
 print("Calculator");
 count = 0
+
 while count == 0:
     num1 = input("First Number: ")
     option = input("Operator (+, -, *, /, =): ")
@@ -22,6 +22,7 @@ while count == 0:
     results = calculate(num1,num2,option)
     print("Results: ", results)
     count = count + 1
+    
 while count > 0:
     option = input("Operator (+, -, *, /, =): ")
     if option == "=":
