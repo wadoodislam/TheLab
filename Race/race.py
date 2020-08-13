@@ -3,73 +3,79 @@ import time
 
 
 class Animal:
+    position = 1
 
     def generatenumber(self):
         num = random.randint(1, 10)
+        print(" this ",num)
         return num
 
     def move(self):
-        return self.generatenumber()
+        raise NotImplementedError()
+
+    def prints(self):
+        raise NotImplementedError()
+
+    def has_won(self):
+        if self.position >= 70:
+            return True
+        return False
 
 
 class TortoiseClass(Animal):
-    def move(self,tortoise):
-        tnum = super().move()
+
+    def move(self):
+        tnum = super().generatenumber()
         if tnum in range(1, 6):
-            tortoise = int(tortoise + 3)
+            self.position += 3
         elif tnum in range(6, 8):
-            tortoise = tortoise - 6
+            self.position -= 6
         elif tnum in range(8, 11):
-            tortoise = tortoise + 1
-        if tortoise < 1:
-            tortoise = 1
-        return tortoise
+            self.position += 1
+        if self.position < 1:
+            self.position = 1
+        return self.position
+
+    def prints(self):
+        print("T" * self.position)
 
 
 class HareClass(Animal):
-    def move(self,hare):
-        hnum = super().move()
+    def move(self):
+        hnum = super().generatenumber()
         if hnum in range(1, 3):
-            hare = hare + 0
+            self.position += 0
         elif hnum in range(3, 5):
-            hare = hare + 9
+            self.position += 9
         elif hnum == 5:
-            hare = hare - 12
+            self.position -= 12
         elif hnum in range(6, 9):
-            hare = hare + 1
+            self.position += 1
         elif hnum in range(9, 11):
-            hare = hare - 2
-        if hare < 1:
-            hare = 1
-        return hare
+            self.position -= 2
+        if self.position < 1:
+            self.position = 1
+        return self.position
+
+    def prints(self):
+        print("H" * self.position)
+
 
 tortoiseMove = TortoiseClass()
 HareMove = HareClass()
-tonum = 1
-hanum = 1
 count = 0
-while tonum < 70 and hanum < 70:
-    time.sleep(1)
+while not(tortoiseMove.has_won() or HareMove.has_won()):
+    # time.sleep(1)
     count = count + 1
     print("iterations ", count)
-    tortoiseMove = TortoiseClass()
-    HareMove = HareClass()
-    tonum = tortoiseMove.move(tonum)
-    hanum = HareMove.move(hanum)
-    t1 = tonum
-    while t1 >= 0:
-        print("T", end="")
-        t1 = t1 - 1
-    print("\b")
-    h1 = hanum
-    while h1 >= 0:
-        print("H", end="")
-        h1 = h1 - 1
-    print("\b")
+    tortoiseMove.move()
+    HareMove.move()
+    tortoiseMove.prints()
+    HareMove.prints()
 
-if tonum > hanum:
+if tortoiseMove.has_won():
     print("\nTortoise Winss..")
-elif hanum > tonum:
-    print("\nHare Winss..")
-else:
+elif HareMove.has_won() and tortoiseMove.has_won():
     print("Its a Tie")
+else:
+    print("\nHare Winss..")
