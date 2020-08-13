@@ -7,7 +7,6 @@ class Animal:
 
     def generatenumber(self):
         num = random.randint(1, 10)
-        print(" this ",num)
         return num
 
     def move(self):
@@ -65,7 +64,7 @@ tortoiseMove = TortoiseClass()
 HareMove = HareClass()
 count = 0
 while not(tortoiseMove.has_won() or HareMove.has_won()):
-    # time.sleep(1)
+    time.sleep(1)
     count = count + 1
     print("iterations ", count)
     tortoiseMove.move()
