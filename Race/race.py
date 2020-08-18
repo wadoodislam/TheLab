@@ -60,21 +60,25 @@ class HareClass(Animal):
         print("H" * self.position)
 
 
-tortoiseMove = TortoiseClass()
-HareMove = HareClass()
-count = 0
-while not(tortoiseMove.has_won() or HareMove.has_won()):
-    time.sleep(1)
-    count = count + 1
-    print("iterations ", count)
-    tortoiseMove.move()
-    HareMove.move()
-    tortoiseMove.prints()
-    HareMove.prints()
+class Simulation(TortoiseClass, HareClass):
+    tortoiseMove = TortoiseClass()
+    HareMove = HareClass()
+    count = 0
+    while not (tortoiseMove.has_won() or HareMove.has_won()):
+        time.sleep(1)
+        count = count + 1
+        print("iterations ", count)
+        tortoiseMove.move()
+        HareMove.move()
+        tortoiseMove.prints()
+        HareMove.prints()
 
-if tortoiseMove.has_won():
-    print("\nTortoise Winss..")
-elif HareMove.has_won() and tortoiseMove.has_won():
-    print("Its a Tie")
-else:
-    print("\nHare Winss..")
+    if tortoiseMove.has_won():
+        print("\nTortoise Winss..")
+    elif HareMove.has_won() and tortoiseMove.has_won():
+        print("Its a Tie")
+    else:
+        print("\nHare Winss..")
+
+
+Simulation()
