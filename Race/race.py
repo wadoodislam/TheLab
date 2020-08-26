@@ -1,19 +1,22 @@
 import random
 import time
+from os import system
 
 
 class Animal:
     position = 1
 
+    def __init__(self, name):
+        self.name = name
+
     def generatenumber(self):
-        num = random.randint(1, 10)
-        return num
+        return random.randint(1, 10)
 
     def move(self):
         raise NotImplementedError()
 
-    def prints(self):
-        raise NotImplementedError()
+    def display(self):
+        print(self.name * self.position)
 
     def has_won(self):
         if self.position >= 70:
@@ -21,7 +24,7 @@ class Animal:
         return False
 
 
-class TortoiseClass(Animal):
+class Tortoise(Animal):
 
     def move(self):
         tnum = super().generatenumber()
@@ -35,11 +38,8 @@ class TortoiseClass(Animal):
             self.position = 1
         return self.position
 
-    def prints(self):
-        print("T" * self.position)
 
-
-class HareClass(Animal):
+class Hare(Animal):
     def move(self):
         hnum = super().generatenumber()
         if hnum in range(1, 3):
@@ -56,29 +56,28 @@ class HareClass(Animal):
             self.position = 1
         return self.position
 
-    def prints(self):
-        print("H" * self.position)
+
+class Simulation:
+    tortoise = Tortoise("T")
+    hare = Hare("H")
+
+    def run(self):
+        while not (self.tortoise.has_won() or self.hare.has_won()):
+            system("clear")
+            time.sleep(1)
+            self.tortoise.move()
+            self.hare.move()
+            self.tortoise.display()
+            self.hare.display()
+
+        if self.hare.has_won() and self.tortoise.has_won():
+            print("Its a Tie")
+        elif self.tortoise.has_won():
+            print("\nTortoise Winss..")
+        elif self.hare.has_won():
+            print("\nHare Winss..")
 
 
-class Simulation(TortoiseClass, HareClass):
-    tortoiseMove = TortoiseClass()
-    HareMove = HareClass()
-    count = 0
-    while not (tortoiseMove.has_won() or HareMove.has_won()):
-        time.sleep(1)
-        count = count + 1
-        print("iterations ", count)
-        tortoiseMove.move()
-        HareMove.move()
-        tortoiseMove.prints()
-        HareMove.prints()
+if __name__ == '__main__':
+    Simulation().run()
 
-    if tortoiseMove.has_won():
-        print("\nTortoise Winss..")
-    elif HareMove.has_won() and tortoiseMove.has_won():
-        print("Its a Tie")
-    else:
-        print("\nHare Winss..")
-
-
-Simulation()
