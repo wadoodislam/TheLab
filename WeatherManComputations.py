@@ -1,6 +1,6 @@
-import WeatherManFileHandle
-import WeatherManDataModel
 from datetime import datetime
+
+import WeatherManFileHandle
 
 
 class Computations:

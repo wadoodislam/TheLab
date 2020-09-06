@@ -1,9 +1,7 @@
-from typing import List
-
-import WeatherManFileHandle
-import WeatherManComputations
-from datetime import datetime
 import argparse
+from datetime import datetime
+
+import WeatherManComputations
 
 OKBLUE = '\033[34m'
 OKRED = '\033[31m'
