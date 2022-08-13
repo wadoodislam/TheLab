@@ -7,7 +7,3 @@ def fibonacci(nth, first=0, second=1):
 
 
 fibonacci(5)
-
-
-
-
