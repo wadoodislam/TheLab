@@ -1,6 +1,6 @@
 def fibonacci(nth, first=0, second=1):
 
-    print(second)
+    print(first)
     for i in range(nth):
         first, second = second, first + second
         print(second)
