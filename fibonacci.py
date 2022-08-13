@@ -1,17 +1,17 @@
 def fibonacci(nth, first, second):
-    print("write this function")
 
-    value = first
-    value2 = second
-    print(value2)
+
+    print(second)
     for i in range(nth):
-        print(value)
-        sum = value+value2
-        value2 = value
-        value = sum
+
+        # sum = value+value2
+        # value2 = value
+        # value = sum
+        first, second = second, first + second
+        print(second)
 
 
-fibonacci(6, 1, 0)
+fibonacci(6, 0, 1)
 
 
 
